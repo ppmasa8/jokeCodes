@@ -15,4 +15,5 @@ class Array
 end
 
 array = Array.new(10){rand(10)}
+p array
 array.insert_sort
