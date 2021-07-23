@@ -1,4 +1,4 @@
-input = gets.chomp.chars
+input = gets.chomp.split(" ")
 @operator = ["+", "-", "*"]
 @stack = []
 
@@ -17,7 +17,7 @@ def calc(elm)
 end
 
 input.each do |elm|
-    if elm =~ /[0-9]/
+    if elm =~ /[0-9]+/
         @stack << elm.to_i
     end
 
