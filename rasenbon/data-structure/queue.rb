@@ -6,6 +6,8 @@ P3 = gets.chomp
 P4 = gets.chomp
 P5 = gets.chomp
 
+
+## main
 cnt = 0
 queue = []
 queue << P1 << P2 << P3 << P4 << P5
