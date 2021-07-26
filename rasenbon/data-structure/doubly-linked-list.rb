@@ -2,7 +2,7 @@ class Node
     attr_accessor :data, :next
 
     def initialize(data, next_node = nil)
-        @node = data
+        @data = data
         @next = next_node
     end
 end
@@ -83,10 +83,10 @@ class LinkedList
             return array
         else
             until current_node.next.nil?
-                array << current_node.data.to_i
+                array << current_node.data
                 current_node = current_node.next
             end
-            array << current_node.data.to_i
+            array << current_node.data
         end
         array
     end
@@ -97,7 +97,9 @@ class LinkedList
 end
 
 list = LinkedList.new
-p list.push(1)
-p list.push(2)
-p list.unshift(0)
+list.push(1)
+list.push(2)
+list.push(5)
+list.pop
 p list.pretty_print
+## => [1, 2]
