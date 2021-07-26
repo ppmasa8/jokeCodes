@@ -1,51 +1,103 @@
-## Create Linked List
 class Node
-    attr_accessor :val, :next, :prev
+    attr_accessor :data, :next
 
-    def initialize(val)
-        @val  = val
-        @next = nil
-        @prev = nil
+    def initialize(data, next_node = nil)
+        @node = data
+        @next = next_node
     end
 end
 
 class LinkedList
-    attr_reader :head
 
-    def initialize(val)
-        @head = Node.new(val)
+    def is_empty?
+        return @head == nil
     end
 
-    def add_tail(val)
-        node = search_tail(@head)
-        node.next = Node.new(val)
-        node.next.prev = node
+    def push(data)
+        if self.is_empty?
+            @head = Node.new(data)
+        else
+            current_node = @head
+            new_node = Node.new(data)
+            until current_node.next.nil?
+                current_node = current_node.next
+            end
+            current_node.next = new_node
+        end
     end
 
-    def del_tail
-        new_tail = search_tail(@head).prev
-        new_tail.next = nil if new_tail
+    def unshift(data)
+        if self.is_empty?
+            @head = Node.new(data)
+        else
+            curr_head = Node.new(data)
+            curr_head.next = @head
+            @head = curr_head
+        end
     end
 
-private
-
-    def append_list(obj, val)
-        obj.next = Node.new(val)
+    def pop
+        if self.is_empty?
+            return "this list is currently empty"
+        else
+            current_node = @head
+            until current_node.next.next.nil?
+                current_node = current_node.next
+            end
+            last_node = current_node.next
+            current_node.next = nil
+        end
+        last_node
     end
 
-    def search_tail(node)
-        return node if !node.next
-        search_tail(node.next)
+    def shift
+        if self.is_empty?
+            return "this list is currently empty"
+        else
+            curr_head = @head
+            new_head = @head.next
+            @head.next = nil
+            @head = new_head
+        end
+        curr_head
+    end
+
+    def size
+        if self.is_empty?
+            count = 0
+        else
+            count = 1
+            current_node = @head
+            until current_node.next.nil?
+                current_node = current_node.next
+                count += 1
+            end
+        end
+        count
+    end
+
+    def pretty_print
+        array = []
+        current_node = @head
+        if self.is_empty?
+            return array
+        else
+            until current_node.next.nil?
+                array << current_node.data.to_i
+                current_node = current_node.next
+            end
+            array << current_node.data.to_i
+        end
+        array
+    end
+
+    def clear
+        @head = nil
     end
 end
 
-list = LinkedList.new(5)
-list.del_tail
-list.add_tail(2)
-list.add_tail(3)
-list.del_tail
-list.add_tail(1)
-list.add_tail(6)
-    puts list.head.val
-    puts list.head.next.val
-    puts list.head.next.next.val
+list = LinkedList.new
+p list.push(1)
+p list.push(2)
+p list.unshift(0)
+p list.pretty_print
