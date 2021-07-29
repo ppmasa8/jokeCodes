@@ -4,11 +4,17 @@
 @q = 3
 @t = [3,4,1]
 
+@cnt = 0
+
 def liner_search
-    cnt, elm = 0, @t.pop
+    elm = @t.pop
     @s.each do |str|
-        cnt += 1 if str == elm
+        @cnt += 1 if str == elm
     end
-    cnt
 end
-p liner_search
+
+while @t != []
+    liner_search
+end
+
+puts @cnt
